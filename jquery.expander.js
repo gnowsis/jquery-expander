@@ -103,6 +103,15 @@
           allText = $.trim( $this.text() ),
           summaryText = allHtml.slice(0, o.slicePoint);
 
+      // bail out if there is no text to truncate
+      if ( allHtml == '' )
+          return;
+
+      // bail out if text is shorter than slicePoint
+      if ( allHtml.length <= o.slicePoint )
+          return;
+      
+  
       // bail out if we've already set up the expander on this element
       if ( $.data(this, 'expander') ) {
         return;
