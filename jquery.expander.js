@@ -183,6 +183,11 @@
 
         // end script if detail has fewer words than widow option
         detailText = allHtml.slice(summaryText.length);
+
+        // no detail text -> we can leave
+        if (detailText == '')
+            return;
+
         if ( detailText.split(/\s+/).length < o.widow && !hasDetails ) {
           return;
         }
