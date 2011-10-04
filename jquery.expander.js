@@ -326,6 +326,7 @@
     function reCollapse(o, el) {
       el.stop(true, true)[o.collapseEffect](o.collapseSpeed, function() {
         var prevMore = el.prev('span.' + o.moreClass).show();
+        el.hide();  // el is the details block (?)
         if (!prevMore.length) {
           el.parent().children('div.' + o.summaryClass).show()
             .find('span.' + o.moreClass).show();
