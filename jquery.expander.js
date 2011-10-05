@@ -59,6 +59,11 @@
       userCollapseText: 'read less',
       userCollapsePrefix: ' ',
 
+      // <br> elements get a penalty
+      brPenalty: 40,
+      brPenaltyLowerThreshold: 20,  // if there are less than 20 characters after penaltizing <br>s...
+      brPenaltyMinimumSlice: 25,    // keep 25 characters
+
 
       // all callback functions have the this keyword mapped to the element in the jQuery set when .expander() is called
 
@@ -100,8 +105,19 @@
           moreSelector = 'span.' + o.moreClass,
           expandSpeed = o.expandSpeed || 0,
           allHtml = $.trim( $this.html() ),
-          allText = $.trim( $this.text() ),
-          summaryText = allHtml.slice(0, o.slicePoint);
+          allText = $.trim( $this.text() );
+
+          if(o.brPenalty != -1)
+          {
+             br_count = allHtml.split(/<br/g).length - 1;
+             var slicePoint = o.slicePoint;
+             slicePoint = slicePoint - (br_count * o.brPenalty);
+             if (slicePoint < o.brPenaltyLowerThreshold)
+                 slicePoint = o.brPenaltyMinimumSlice;
+             o.slicePoint = slicePoint;
+          }
+
+          var summaryText = allHtml.slice(0, o.slicePoint);
 
       // bail out if there is no text to truncate
       if ( allHtml == '' )
