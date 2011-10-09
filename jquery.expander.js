@@ -109,7 +109,7 @@
 
           if(o.brPenalty != -1)
           {
-             br_count = allHtml.split(/<br/g).length - 1;
+             br_count = allHtml.slice(0, o.slicePoint).split(/<br/g).length - 1;
              var slicePoint = o.slicePoint;
              slicePoint = slicePoint - (br_count * o.brPenalty);
              if (slicePoint < o.brPenaltyLowerThreshold)
