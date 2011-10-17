@@ -64,6 +64,9 @@
       brPenaltyLowerThreshold: 20,  // if there are less than 20 characters after penaltizing <br>s...
       brPenaltyMinimumSlice: 25,    // keep 25 characters
 
+      // force to avoid 'block' mode
+      neverHasBlocks: false,
+
 
       // all callback functions have the this keyword mapped to the element in the jQuery set when .expander() is called
 
@@ -96,7 +99,7 @@
           $summEl = $([]),
           o = $.meta ? $.extend({}, opts, $this.data()) : opts,
           hasDetails = !!$this.find('.' + o.detailClass).length,
-          hasBlocks = !!$this.find('*').filter(function() {
+          hasBlocks = !o.neverHasBlocks && !!$this.find('*').filter(function() {
             var display = $(this).css('display');
             return (/^block|table|list/).test(display);
           }).length,
