@@ -108,7 +108,7 @@
           moreSelector = 'span.' + o.moreClass,
           expandSpeed = o.expandSpeed || 0,
           allHtml = $.trim( $this.html() ),
-          allText = $.trim( $this.text() );
+          allText = $.trim( $this.text() ).replace(/\s+/g, " ");
 
           if(o.brPenalty != -1)
           {
@@ -127,7 +127,7 @@
           return;
 
       // bail out if text is shorter than slicePoint
-      if ( allHtml.length <= o.slicePoint )
+      if ( allText.length <= o.slicePoint )
           return;
       
   
